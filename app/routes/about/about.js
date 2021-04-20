@@ -5,7 +5,7 @@ angular.module('app.about', []).component('about', {
     var vm = this;
 
     vm.$routerOnActivate = function(toRoute, fromRoute) {
-    	this.name = toRoute.params.name;
+    	// this.name = toRoute.params.name;
     };
   }
 });

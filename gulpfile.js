@@ -22,7 +22,8 @@ gulp.task('default', [
 
 gulp.task('deps', function() {
     return gulp.src([
-        'node_modules/@angular/router/angular1/angular_1_router.js'
+        'node_modules/@angular/router/angular1/angular_1_router.js',
+        'bower_components/angularUtils-pagination/dirPagination.js'
     ])
     .pipe(sourcemaps.init())
     .pipe(concat('dependencies.js'))

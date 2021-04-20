@@ -1,6 +1,11 @@
 <nav class="navbar navbar-default">
   <ul class="nav navbar-nav">
     <li><a ng-link="['/Home']">Home</a></li>
+    <li><a ng-link="['/Number']">Factory</a></li>
+    <li><a ng-link="['/User']">User</a></li>
+    <li><a ng-link="['/Time']">Directive</a></li>
+    <li><a ng-link="['/State']">Filter</a></li>
+    <li><a ng-link="['/Registration']">Registration</a></li>
     <li><a ng-link="['/About', { name: 'Me' }]">About</a></li>
     <li><a ng-if="!vm.Auth.loggedIn" ng-link="['/Login']">Login</a></li>
     <li><a ng-if="vm.Auth.loggedIn" ng-click="vm.logout()">Logout</a></li>

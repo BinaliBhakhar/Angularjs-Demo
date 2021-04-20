@@ -1,6 +1,88 @@
-<form ng-if="!vm.Auth.loggedIn">
-	<input type="text" ng-model="vm.username">
-	<input type="password" ng-model="vm.password">
-	<button ng-click="vm.login()" value="Login">Login</button>
+<!-- <form ng-if="!vm.Auth.loggedIn" name="userForm" novalidate>
+<div class="col-md-5 col-md-offset-3">
+	<h3 style="text-align: center;">Login</h3>
+	<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+		<label>Email</label>
+		<input type="email" name="email" class="form-control" ng-model="vm.email">
+		<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+	</div>
+
+	<div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+		<label>Password</label>
+		<input type="password" name="password" ng-model="vm.password" class="form-control" ng-minlength="6" required>
+		<p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">password is required.
+		</p>
+		<p ng-show="userForm.password.$error.minlength" class="help-block">Password length must be 6 character.</p>
+	</div>
+
+	<button ng-click="vm.login()" class="btn-sm btn-success" value="Login">Login</button>
+</div>
 </form>
-<p ng-if="vm.Auth.loggedIn">You are logged in!</p>
+<p ng-if="vm.Auth.loggedIn">You are logged in!</p> -->
+
+
+<style>
+	body,
+	html {
+		height: 100%;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	.bg-img {
+		/* The image used */
+		background-image: url("https://www.ygfconcierge.com/wp-content/uploads/2016/02/home-page-background-2-1024x683.jpg");
+
+		min-height: 380px;
+
+		/* Center and scale the image nicely */
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+	}
+
+	/* Add styles to the form container */
+	.container {
+		position: absolute;
+		right: 0;
+		margin: 50px;
+		max-width: 300px;
+		padding: 16px;
+		background-color: white;
+	}
+
+	.btn:hover {
+		opacity: 1;
+	}
+</style>
+<h2>Login Here..!!</h2>
+<div class="bg-img">
+	<form ng-if="!vm.Auth.loggedIn" name="userForm" novalidate class="container">
+		<h1>Login</h1>
+
+		<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+			<label>Email</label>
+			<input type="email" name="email" class="form-control" ng-model="vm.email">
+			<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid
+				email.</p>
+		</div>
+
+		<div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+			<label>Password</label>
+			<input type="password" name="password" ng-model="vm.password" class="form-control" ng-minlength="6"
+				required>
+			<p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">password is
+				required.
+			</p>
+			<p ng-show="userForm.password.$error.minlength" class="help-block">Password length must be 6 character.
+			</p>
+		</div>
+		<button ng-click="vm.login()" class="btn-sm btn-success" value="Login">Login</button>
+	</form>
+	<p ng-if="vm.Auth.loggedIn">You are logged in!</p>
+
+</div>
