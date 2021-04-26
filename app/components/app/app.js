@@ -11,7 +11,7 @@ var app = angular.module('myApp', [
 	'app.user',
 	'app.number',
 	'app.time',
-	'app.state',
+	'app.filter',
 	'app.registration'
 ]);
 
@@ -25,7 +25,7 @@ app.component('app', {
 		{ path: '/number', component: 'number', name: 'Number' },
 		{ path: '/user', component: 'user', name: 'User' },
 		{ path: '/time', component: 'time', name: 'Time' },
-		{ path: '/state', component: 'state', name: 'State' },
+		{ path: '/filter', component: 'filter', name: 'Filter' },
 		{ path: '/registration', component: 'registration', name: 'Registration' },
 		{ path: '/dashboard', component: 'dashboard', name: 'Dashboard' },
 		{ path: '/admin/...', component: 'admin', name: 'Admin' },

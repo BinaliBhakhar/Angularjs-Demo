@@ -1,4 +1,4 @@
-angular.module('app.filter.stateful', [])
+angular.module('app.filter.reverseFilter', [])
 .filter('reverse', function() {
     return function(input, uppercase) {
       input = input || '';

@@ -1,4 +1,3 @@
-angular.module('app.registration', []).component('registration', {
-    templateUrl: 'routes/registration/registration.html'
-  });
-  
+angular.module('app.registration', ['app.directive.validation']).component('registration', {
+  templateUrl: 'routes/registration/registration.html'  
+});
