@@ -23,7 +23,7 @@
 	.container {
 		position: absolute;
 		right: 0;
-		margin: 50px;
+		margin: 20px;
 		max-width: 300px;
 		padding: 16px;
 		background-color: white;
@@ -31,6 +31,14 @@
 
 	.btn:hover {
 		opacity: 1;
+	}
+
+	.card__action {
+		display: flex;
+		padding: 8px;
+		flex-direction: row;
+		justify-content: space-between;
+		padding-top: 0;
 	}
 </style>
 <h2>Login Here..!!</h2>
@@ -56,7 +64,19 @@
 			</p>
 		</div>
 		<button ng-click="vm.login()" class="btn-sm btn-success" value="Login">Login</button>
-	</form>
-	<p ng-if="vm.Auth.loggedIn">You are logged in!</p>
+		<p class="text-center"><a href="#" data-toggle="form" data-target="amnesiaForm" data-type="amnesia">Forgot your
+				password?</a></p>
+		<p class="text-center"><a href="/#!/registration" data-toggle="form" data-target="amnesiaForm" data-type="amnesia">No have an account?</a></p>
+		<!-- <div class="card__action">
+			<button class="btn btn--secondry btn--block" data-toggle="form" data-target="registerForm"
+				data-type="register" type="button">
+				Register
+			</button>
+		</div> -->
+</div>
+
+</div>
+</form>
+<p ng-if="vm.Auth.loggedIn">You are logged in!</p>
 
 </div>

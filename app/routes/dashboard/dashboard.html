@@ -1,5 +1,314 @@
-<div>
+<!-- <div>
 	<h1>Dashboard</h1>
 	<img style="height: 100%; width: 100%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRq-kjTxMtLFx6j3HNGx0169yiqzOeqLAyUA&usqp=CAU" />
 	<img ng-src="{{image}}" />
+</div> -->
+
+<style>
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	ul li {
+		text-transform: capitalize;
+	}
+
+	.navbar {
+		border-radius: 0;
+		background: #05676E;
+		color: green;
+		border: none;
+		padding: 10px;
+	}
+
+	.by-month {
+		font-size: 1.3em;
+		color: #668284;
+	}
+
+	.by-month li {
+		margin: 10px 0;
+	}
+
+	.bar-chart {
+		display: block;
+		height: 300px;
+		width: 98%;
+		position: relative;
+		border-left: 1px solid #668284;
+		border-bottom: 1px solid #668284;
+		margin-left: 2%;
+		margin-bottom: 50px;
+		/* .pace {
+     height:30px;
+     overflow:hidden;
+     display:none;
+     span {
+       transform:rotate(0deg);
+       background:$turqoise;
+       width:100px;
+       border-radius:5px;
+       left:45px;
+       z-index:0;
+       
+     }
+   }*/
+	}
+
+	.bar-chart td {
+		position: absolute;
+		width: 20px;
+		bottom: 0;
+		margin-left: 10px;
+		display: block;
+	}
+
+	.bar-chart td span {
+		position: absolute;
+		left: 25px;
+		bottom: 0;
+		padding: 5px;
+		color: white;
+		-webkit-transform: rotate(-90deg);
+		transform: rotate(-90deg);
+		-webkit-transform-origin: bottom left;
+		transform-origin: bottom left;
+		width: 300px;
+	}
+
+	.bar-chart .legend {
+		bottom: -40px;
+		font-size: 0.8em;
+		width: 50px;
+	}
+
+	.bar-chart .distance {
+		background: #B9D7D9;
+	}
+
+	.bar-chart .distance.highlight {
+		background: #d9bbb9;
+	}
+
+	.bar-chart .time {
+		background: #668284;
+		margin-left: 30px;
+	}
+
+	.bar-chart .time.highlight {
+		background: #846866;
+	}
+
+	.key {
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		margin-right: 5px;
+	}
+
+	.key.distance {
+		background: #B9D7D9;
+	}
+
+	.key.time {
+		background: #668284;
+	}
+
+	.line-chart {
+		position: relative;
+	}
+
+	.line-chart:before {
+		content: "Minutes per Mile";
+		display: block;
+		position: absolute;
+		bottom: 20px;
+		left: 30px;
+		width: 200px;
+		-webkit-transform: rotate(-90deg);
+		transform: rotate(-90deg);
+		-webkit-transform-origin: bottom left;
+		transform-origin: bottom left;
+		text-align: center;
+	}
+
+	.line-chart .line-legend-max {
+		position: absolute;
+		bottom: 20px;
+		font-size: 0.7em;
+		left: 1%;
+	}
+
+	.line-chart .line-legend-min {
+		position: absolute;
+		top: 15px;
+		font-size: 0.7em;
+		left: 1%;
+	}
+
+	svg {
+		margin-left: 4%;
+		height: 200px;
+		width: 96%;
+		border-left: 1px solid #668284;
+		border-bottom: 1px solid #668284;
+	}
+
+	svg line {
+		stroke: #05676E;
+		stroke-width: 3px;
+	}
+
+	.pie {
+		margin: 0;
+		border-radius: 50%;
+		width: 200px;
+		height: 200px;
+		float: left;
+	}
+
+	table.pie-table {
+		text-align: center;
+		margin: 0 3% 0 10px;
+		width: 120px;
+		height: 60px;
+		float: right;
+	}
+
+	table.pie-table td {
+		padding: 4px;
+		background: #eee;
+	}
+</style>
+
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+
+<div>
+	<div>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div style="text-align: center;">
+					Dashboard
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Jogs By Month</h3>
+						</div>
+						<div class="panel-body">
+							<ul class="by-month">
+								<li ng-repeat="data in monthsJogged" ng-if="data.count > 0">{{data.month}} -
+									{{data.count}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-10">
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Last 10 Jogs - <span class="key distance"></span>Distance &
+										<span class="key time"></span>Time</h3>
+								</div>
+								<div class="panel-body">
+									<table class="bar-chart">
+										<tr ng-repeat="run in data | limitTo:-10">
+											<td class="legend" ng-style="{left:$index * 10 +'%'}">
+												{{run.date | date}} </td>
+											<td ng-style="{ left:$index * 10 +'%', height: (run.time / maxTime) * 300 + 'px'}"
+												class="time" ng-class="{highlight: run.time === maxTime}"><span>
+
+													{{run.time | number}} Minutes</span></td>
+											<td ng-style="{ left:$index * 10 +'%', height: (run.distance / maxDistance) * 300 + 'px'}"
+												class="distance" ng-class="{highlight: run.distance === maxDistance}">
+												<span>
+
+													{{run.distance}} Miles
+												</span></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Pace</h3>
+								</div>
+								<div class="panel-body line-chart">
+									<div class="line-legend-min">
+										{{minPace | number:2}}
+									</div>
+									<div class="line-legend-max">
+										{{maxPace | number:2}}
+									</div>
+
+									<svg>
+										<line ng-repeat="run in data" x1="{{($index - 1) / data.length * 100}}%"
+											x2="{{$index / data.length * 100}}%" y1="{{data[$index - 1].relPace * 200}}"
+											y2="{{run.relPace * 200}}">
+
+										</line>
+									</svg>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Total Jogs ({{total}}) - Split by Days</h3>
+								</div>
+								<div class="panel-body">
+									<div class="pie"></div>
+									<table class="pie-table">
+										<tr>
+											<td style="background:yellowgreen; color:white;">Monday</td>
+											<td>{{monday}}</td>
+										</tr>
+										<tr>
+											<td style="background:gold; color:white;">Tuesday</td>
+											<td>{{tuesday}}</td>
+										</tr>
+										<tr>
+											<td style="background:silver; color:white;">Wednesday</td>
+											<td>{{wednesday}}</td>
+										</tr>
+										<tr>
+											<td style="background:lightblue; color:white;">Thursday</td>
+											<td>{{thursday}}</td>
+										</tr>
+										<tr>
+											<td style="background:orange; color:white;">Friday</td>
+											<td>{{friday}}</td>
+										</tr>
+										<tr>
+											<td style="background:tomato; color:white;">Saturday</td>
+											<td>{{saturday}}</td>
+										</tr>
+										<tr>
+											<td style="background:navy; color:white;">Sunday</td>
+											<td>{{sunday}}</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+

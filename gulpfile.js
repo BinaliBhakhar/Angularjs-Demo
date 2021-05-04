@@ -23,7 +23,9 @@ gulp.task('default', [
 gulp.task('deps', function() {
     return gulp.src([
         'node_modules/@angular/router/angular1/angular_1_router.js',
-        'bower_components/angularUtils-pagination/dirPagination.js'
+        'bower_components/angularUtils-pagination/dirPagination.js',
+        'bower_components/angular-animate/angular-animate.min.js',
+        'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
     ])
     .pipe(sourcemaps.init())
     .pipe(concat('dependencies.js'))
@@ -60,7 +62,7 @@ gulp.task('style', function() {
 gulp.task('connect', function() {
   connect.server({
     root: 'dist',
-    port: 8080
+    port: 8081
   });
 });
 

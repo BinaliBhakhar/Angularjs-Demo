@@ -12,7 +12,8 @@ var app = angular.module('myApp', [
 	'app.number',
 	'app.time',
 	'app.filter',
-	'app.registration'
+	'app.registration',
+	'app.contact'
 ]);
 
 app.value('$routerRootComponent', 'app');
@@ -27,6 +28,7 @@ app.component('app', {
 		{ path: '/time', component: 'time', name: 'Time' },
 		{ path: '/filter', component: 'filter', name: 'Filter' },
 		{ path: '/registration', component: 'registration', name: 'Registration' },
+		{ path: '/contact', component: 'contact', name: 'Contact' },
 		{ path: '/dashboard', component: 'dashboard', name: 'Dashboard' },
 		{ path: '/admin/...', component: 'admin', name: 'Admin' },
 		{ path: '/**', component: 'notfound', name: 'NotFound' }
